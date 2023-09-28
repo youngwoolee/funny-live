@@ -15,7 +15,7 @@ spring:
   # jpa 설정
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/joey
+    url: jdbc:mariadb://localhost:3306/funny-live
     username: joey
     password: joey
   jpa:
