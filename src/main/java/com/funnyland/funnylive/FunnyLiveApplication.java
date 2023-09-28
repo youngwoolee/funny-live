@@ -1,0 +1,13 @@
+package com.funnyland.funnylive;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class FunnyLiveApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(FunnyLiveApplication.class, args);
+    }
+
+}
