@@ -1,13 +1,12 @@
 package com.funnyland.funnylive.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.funnyland.funnylive.domain.Product;
 import com.funnyland.funnylive.endpoint.product.request.ProductRequest;
 import com.funnyland.funnylive.endpoint.product.response.ProductResponse;
 import com.funnyland.funnylive.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -17,11 +16,9 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public List<ProductResponse> getProducts() {
-        List<Product> products = productRepository.findAll();
-        return products.stream()
-                .map(ProductResponse::of)
-                .collect(Collectors.toList());
+    public Page<ProductResponse> getProducts(Pageable pageable) {
+        Page<Product> products = productRepository.findAll(pageable);
+        return products.map(ProductResponse::of);
     }
 
 

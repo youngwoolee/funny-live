@@ -1,11 +1,11 @@
 package com.funnyland.funnylive.endpoint.product.controller;
 
-import java.util.List;
-
 import com.funnyland.funnylive.endpoint.product.request.ProductRequest;
 import com.funnyland.funnylive.endpoint.product.response.ProductResponse;
 import com.funnyland.funnylive.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +21,8 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public List<ProductResponse> getProducts() {
-        return productService.getProducts();
+    public Page<ProductResponse> getProducts(Pageable pageable) {
+        return productService.getProducts(pageable);
     }
 
     @PostMapping
