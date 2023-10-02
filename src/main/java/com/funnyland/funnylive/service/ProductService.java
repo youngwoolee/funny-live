@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Service
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ImageStorageService imageStorageService;
 
     public Page<ProductResponse> getProducts(Pageable pageable) {
         Page<Product> products = productRepository.findAll(pageable);
@@ -32,5 +34,9 @@ public class ProductService {
                 .build();
         Product savedProduct = productRepository.save(product);
         return ProductResponse.of(savedProduct);
+    }
+
+    public String uploadImage(MultipartFile file) {
+        return imageStorageService.upload(file);
     }
 }

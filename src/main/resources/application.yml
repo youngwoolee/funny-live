@@ -33,3 +33,6 @@ logging:
     org.hibernate:
       type.descriptor.sql: trace #show parameter binding
       SQL: DEBUG
+
+local:
+  image-upload-path: /Users/joeylee/project/personel/funny-live/upload
