@@ -1,5 +1,6 @@
 package com.funnyland.funnylive.domain;
 
+import com.funnyland.funnylive.endpoint.product.request.ProductRequest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +27,25 @@ public class Product extends BaseEntity {
     private String description;
     private double price;
     private String imageURL;
+    private boolean active;
 
     private String productType; // "popular" 또는 "open_market" 등
 
+    public Product edit(ProductRequest productRequest) {
+        this.name = productRequest.getName();
+        this.description = productRequest.getDescription();
+        this.price = productRequest.getPrice();
+        this.imageURL = productRequest.getImageURL();
+        return this;
+    }
+
+    public Product active() {
+        this.active = true;
+        return this;
+    }
+
+    public Product inActive() {
+        this.active = false;
+        return this;
+    }
 }

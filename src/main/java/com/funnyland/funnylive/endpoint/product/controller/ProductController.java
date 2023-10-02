@@ -8,7 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,9 +30,19 @@ public class ProductController {
         return productService.getProducts(pageable);
     }
 
+    @GetMapping("/{productId}")
+    public ProductResponse getProduct(@PathVariable Long productId) {
+        return productService.getProduct(productId);
+    }
+
     @PostMapping
-    public ProductResponse createProduct(@RequestBody ProductRequest productRequest) {
+    public ProductResponse create(@RequestBody ProductRequest productRequest) {
         return productService.createProduct(productRequest);
+    }
+
+    @PutMapping("/{productId}")
+    public ProductResponse update(@PathVariable Long productId, @RequestBody ProductRequest productRequest) {
+        return productService.updateProduct(productId, productRequest);
     }
 
     @PostMapping("/upload")
@@ -38,4 +50,16 @@ public class ProductController {
         String imageUrl = productService.uploadImage(file);
         return ResponseEntity.ok(imageUrl);
     }
+
+    @PutMapping("/{productId}/active")
+    public ProductResponse active(@PathVariable Long productId) {
+        return productService.active(productId);
+    }
+
+    @PutMapping("/{productId}/inactive")
+    public ProductResponse inActive(@PathVariable Long productId) {
+        return productService.inActive(productId);
+    }
+
+
 }

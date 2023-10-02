@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -38,5 +39,35 @@ public class ProductService {
 
     public String uploadImage(MultipartFile file) {
         return imageStorageService.upload(file);
+    }
+
+    public ProductResponse getProduct(Long productId) {
+        return productRepository.findById(productId)
+                .map(ProductResponse::of)
+                .orElseThrow(() -> new RuntimeException("Product not exist"));
+    }
+
+    @Transactional
+    public ProductResponse updateProduct(Long productId, ProductRequest productRequest) {
+        return productRepository.findById(productId)
+                .map(product -> product.edit(productRequest))
+                .map(ProductResponse::of)
+                .orElseThrow(() -> new RuntimeException("Product not exist"));
+    }
+
+    @Transactional
+    public ProductResponse active(Long productId) {
+        return productRepository.findById(productId)
+                .map(Product::active)
+                .map(ProductResponse::of)
+                .orElseThrow(() -> new RuntimeException("Product not exist"));
+    }
+
+    @Transactional
+    public ProductResponse inActive(Long productId) {
+        return productRepository.findById(productId)
+                .map(Product::inActive)
+                .map(ProductResponse::of)
+                .orElseThrow(() -> new RuntimeException("Product not exist"));
     }
 }
