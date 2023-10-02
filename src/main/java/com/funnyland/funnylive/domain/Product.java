@@ -28,6 +28,8 @@ public class Product extends BaseEntity {
     private double price;
     private String imageURL;
     private boolean active;
+    //TODO: 판매자
+
 
     private String productType; // "popular" 또는 "open_market" 등
 
