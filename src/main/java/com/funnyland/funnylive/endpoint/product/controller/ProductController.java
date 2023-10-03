@@ -1,8 +1,8 @@
 package com.funnyland.funnylive.endpoint.product.controller;
 
+import com.funnyland.funnylive.endpoint.product.facade.ProductFacade;
 import com.funnyland.funnylive.endpoint.product.request.ProductRequest;
 import com.funnyland.funnylive.endpoint.product.response.ProductResponse;
-import com.funnyland.funnylive.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,42 +23,42 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/products")
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductFacade productFacade;
 
     @GetMapping
     public Page<ProductResponse> getProducts(Pageable pageable) {
-        return productService.getProducts(pageable);
+        return productFacade.getProducts(pageable);
     }
 
     @GetMapping("/{productId}")
     public ProductResponse getProduct(@PathVariable Long productId) {
-        return productService.getProduct(productId);
+        return productFacade.getProduct(productId);
     }
 
     @PostMapping
     public ProductResponse create(@RequestBody ProductRequest productRequest) {
-        return productService.createProduct(productRequest);
+        return productFacade.createProduct(productRequest);
     }
 
     @PutMapping("/{productId}")
     public ProductResponse update(@PathVariable Long productId, @RequestBody ProductRequest productRequest) {
-        return productService.updateProduct(productId, productRequest);
+        return productFacade.updateProduct(productId, productRequest);
     }
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
-        String imageUrl = productService.uploadImage(file);
+        String imageUrl = productFacade.uploadImage(file);
         return ResponseEntity.ok(imageUrl);
     }
 
     @PutMapping("/{productId}/active")
     public ProductResponse active(@PathVariable Long productId) {
-        return productService.active(productId);
+        return productFacade.active(productId);
     }
 
     @PutMapping("/{productId}/inactive")
     public ProductResponse inActive(@PathVariable Long productId) {
-        return productService.inActive(productId);
+        return productFacade.inActive(productId);
     }
 
 
