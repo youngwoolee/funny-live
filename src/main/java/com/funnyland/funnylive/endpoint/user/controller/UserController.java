@@ -1,5 +1,6 @@
 package com.funnyland.funnylive.endpoint.user.controller;
 
+import com.funnyland.funnylive.endpoint.user.facade.UserFacade;
 import com.funnyland.funnylive.endpoint.user.request.UserRequest;
 import com.funnyland.funnylive.endpoint.user.response.UserResponse;
 import com.funnyland.funnylive.service.UserService;
@@ -17,16 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService userService;
+    private final UserFacade userFacade;
 
     @GetMapping("/{userId}")
     public UserResponse getUser(@PathVariable Long userId) {
-        return userService.getUser(userId);
+        return userFacade.getUser(userId);
     }
 
     @PostMapping
     public UserResponse createUser(@RequestBody UserRequest userRequest) {
-        return userService.createUser(userRequest);
+        return userFacade.createUser(userRequest);
     }
 
 }
