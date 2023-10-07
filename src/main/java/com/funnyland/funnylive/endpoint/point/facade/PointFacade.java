@@ -34,4 +34,9 @@ public class PointFacade {
         return pointService.getPointTransactions(user).stream()
                 .map(PointTransactionResponse::of).collect(Collectors.toList());
     }
+
+    public void refundPoints(Long userId, int amount) {
+        User user = userService.getUser(userId);
+        pointService.refundPoints(user, amount);
+    }
 }

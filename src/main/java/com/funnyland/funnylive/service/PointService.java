@@ -40,4 +40,11 @@ public class PointService {
     public List<PointTransaction> getPointTransactions(User user) {
         return pointTransactionRepository.findAllByUserId(user.getId());
     }
+
+    public void refundPoints(User user, int amount) {
+        user.deductPoints(amount);
+        userRepository.save(user);
+        PointTransaction transaction = new PointTransaction(amount, user, PointTransactionType.REFUND);
+        pointTransactionRepository.save(transaction);
+    }
 }

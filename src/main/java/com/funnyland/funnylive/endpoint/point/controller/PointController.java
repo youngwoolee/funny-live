@@ -39,4 +39,9 @@ public class PointController {
         return pointFacade.getPointTransactions(userId);
     }
 
+    @PostMapping("/refund")
+    public void refundPoints(@RequestBody PointRequest request) {
+        Long userId = 1L;
+        pointFacade.refundPoints(userId, request.getAmount());
+    }
 }
