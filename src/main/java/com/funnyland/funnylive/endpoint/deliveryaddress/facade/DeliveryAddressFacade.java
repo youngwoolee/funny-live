@@ -7,7 +7,7 @@ import com.funnyland.funnylive.domain.DeliveryAddress;
 import com.funnyland.funnylive.domain.User;
 import com.funnyland.funnylive.endpoint.deliveryaddress.request.DeliveryAddressRequest;
 import com.funnyland.funnylive.endpoint.deliveryaddress.response.DeliveryAddressResponse;
-import com.funnyland.funnylive.endpoint.deliveryaddress.service.DeliveryAddressService;
+import com.funnyland.funnylive.service.DeliveryAddressService;
 import com.funnyland.funnylive.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,9 +30,20 @@ public class DeliveryAddressFacade {
 
     public List<DeliveryAddressResponse> getDeliveryAddressList(Long userId) {
         User user = userService.getUser(userId);
-        List<DeliveryAddress> deliveryAddressList = deliveryAddressService.getDeliveryAddressList(user);
-        return deliveryAddressList.stream()
+        List<DeliveryAddress> findDeliveryAddressList = deliveryAddressService.getDeliveryAddressList(user);
+        return findDeliveryAddressList.stream()
                 .map(DeliveryAddressResponse::of)
                 .collect(Collectors.toList());
+    }
+
+    public DeliveryAddressResponse getDeliveryAddress(Long userId, Long deliveryAddressId) {
+        User user = userService.getUser(userId);
+        DeliveryAddress findDeliveryAddress = deliveryAddressService.getDeliveryAddress(user, deliveryAddressId);
+        return DeliveryAddressResponse.of(findDeliveryAddress);
+    }
+
+    public void deleteDeliveryAddress(Long userId, Long deliveryAddressId) {
+        User user = userService.getUser(userId);
+        deliveryAddressService.deleteDeliveryAddress(user, deliveryAddressId);
     }
 }
