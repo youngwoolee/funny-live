@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class DeliveryAddressResponse {
     private String name;
+    private String phoneNumber;
     private String recipientName;
     private String roadNameAddress;
     private String inputDetail;
@@ -24,6 +25,7 @@ public class DeliveryAddressResponse {
     public static DeliveryAddressResponse of(DeliveryAddress deliveryAddress) {
         return DeliveryAddressResponse.builder()
                 .name(deliveryAddress.getName())
+                .phoneNumber(deliveryAddress.getPhoneNumber())
                 .recipientName(deliveryAddress.getRecipientName())
                 .roadNameAddress(deliveryAddress.getRoadNameAddress())
                 .inputDetail(deliveryAddress.getInputDetail())

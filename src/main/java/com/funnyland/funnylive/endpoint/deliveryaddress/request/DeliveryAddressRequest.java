@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class DeliveryAddressRequest {
 
     private String name;
+    private String phoneNumber;
     private String recipientName;
     private String roadNameAddress;
     private String inputDetail;
@@ -20,9 +21,14 @@ public class DeliveryAddressRequest {
     private String postalCode;
     private boolean isDefault;
 
+    public boolean getIsDefault() {
+        return isDefault;
+    }
+
     public DeliveryAddress toDomain() {
         DeliveryAddress deliveryAddress = DeliveryAddress.builder()
                 .name(this.name)
+                .phoneNumber(this.phoneNumber)
                 .recipientName(this.recipientName)
                 .roadNameAddress(this.roadNameAddress)
                 .inputDetail(this.inputDetail)

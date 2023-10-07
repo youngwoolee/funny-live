@@ -1,5 +1,8 @@
 package com.funnyland.funnylive.endpoint.deliveryaddress.facade;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.funnyland.funnylive.domain.DeliveryAddress;
 import com.funnyland.funnylive.domain.User;
 import com.funnyland.funnylive.endpoint.deliveryaddress.request.DeliveryAddressRequest;
@@ -25,4 +28,11 @@ public class DeliveryAddressFacade {
     }
 
 
+    public List<DeliveryAddressResponse> getDeliveryAddressList(Long userId) {
+        User user = userService.getUser(userId);
+        List<DeliveryAddress> deliveryAddressList = deliveryAddressService.getDeliveryAddressList(user);
+        return deliveryAddressList.stream()
+                .map(DeliveryAddressResponse::of)
+                .collect(Collectors.toList());
+    }
 }

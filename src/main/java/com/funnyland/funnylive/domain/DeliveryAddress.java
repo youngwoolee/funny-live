@@ -30,6 +30,7 @@ public class DeliveryAddress {
     private User user;
 
     private String name;
+    private String phoneNumber;
     private String recipientName;
     private String roadNameAddress;
     private String inputDetail;
