@@ -6,6 +6,7 @@ import java.util.List;
 import com.funnyland.funnylive.domain.Order;
 import com.funnyland.funnylive.domain.OrderItem;
 import com.funnyland.funnylive.domain.PointTransaction;
+import com.funnyland.funnylive.domain.PointTransactionType;
 import com.funnyland.funnylive.domain.Product;
 import com.funnyland.funnylive.domain.User;
 import com.funnyland.funnylive.endpoint.order.request.OrderItemsRequest;
@@ -41,7 +42,7 @@ public class OrderService {
         Order savedOrder = orderRepository.save(order);
         int totalPoints = calculateTotalPoints(orderItems);
         user.deductPoints(totalPoints);
-        PointTransaction pointTransaction = new PointTransaction(totalPoints, user, "차감");
+        PointTransaction pointTransaction = new PointTransaction(totalPoints, user, PointTransactionType.USE);
         pointTransactionRepository.save(pointTransaction);
         return savedOrder;
     }

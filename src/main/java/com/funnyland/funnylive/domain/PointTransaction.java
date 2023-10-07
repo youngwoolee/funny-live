@@ -3,6 +3,7 @@ package com.funnyland.funnylive.domain;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,7 +26,9 @@ public class PointTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String transactionType;
+
+    @Enumerated
+    private PointTransactionType transactionType;
     private int amount;
     private LocalDateTime createdAt;
 
@@ -33,9 +36,9 @@ public class PointTransaction {
     @JoinColumn(name = "user_account_id")
     private User user;
 
-    public PointTransaction(int amount, User user, String transactionType) {
+    public PointTransaction(int amount, User user, PointTransactionType transactionType) {
+        this.transactionType = transactionType;
         this.amount = amount;
         this.user = user;
-        this.transactionType = transactionType;
     }
 }

@@ -23,6 +23,7 @@ public class UserResponse {
                 .userId(user.getId())
                 .userName(user.getUsername())
                 .email(user.getEmail())
+                .point(user.getPoint())
                 .build();
     }
 

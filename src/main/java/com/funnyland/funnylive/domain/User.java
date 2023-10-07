@@ -30,4 +30,8 @@ public class User extends BaseEntity{
     public void deductPoints(int totalPoints) {
         this.point -= totalPoints;
     }
+
+    public void increasePoints(int amount) {
+        this.point += amount;
+    }
 }
