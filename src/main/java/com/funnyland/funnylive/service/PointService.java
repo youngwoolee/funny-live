@@ -1,5 +1,7 @@
 package com.funnyland.funnylive.service;
 
+import java.util.List;
+
 import com.funnyland.funnylive.domain.PointTransaction;
 import com.funnyland.funnylive.domain.PointTransactionType;
 import com.funnyland.funnylive.domain.User;
@@ -24,5 +26,18 @@ public class PointService {
 
         PointTransaction transaction = new PointTransaction(amount, user, PointTransactionType.CHARGE);
         pointTransactionRepository.save(transaction);
+    }
+
+    public void usePoints(User user, int amount) {
+        //TODO: 잔액만큼 있는 사용금액인지 체크
+        user.deductPoints(amount);
+        userRepository.save(user);
+
+        PointTransaction transaction = new PointTransaction(amount, user, PointTransactionType.USE);
+        pointTransactionRepository.save(transaction);
+    }
+
+    public List<PointTransaction> getPointTransactions(User user) {
+        return pointTransactionRepository.findAllByUserId(user.getId());
     }
 }
