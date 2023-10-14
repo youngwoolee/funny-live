@@ -1,6 +1,8 @@
 package com.funnyland.funnylive.endpoint.storagebox.response;
 
+import com.funnyland.funnylive.domain.StorageBox;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class StorageBoxResponse {
 
     private Long storageBoxId;
@@ -17,5 +20,15 @@ public class StorageBoxResponse {
 
     private Long userId;
     private String userName;
+
+    public static StorageBoxResponse of(StorageBox storageBox) {
+        return StorageBoxResponse.builder()
+                .storageBoxId(storageBox.getId())
+                .productId(storageBox.getProduct().getId())
+                .productName(storageBox.getProduct().getName())
+                .userId(storageBox.getUser().getId())
+                .userName(storageBox.getUser().getUsername())
+                .build();
+    }
 
 }
