@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.funnyland.funnylive.domain.CraneGame;
 import com.funnyland.funnylive.endpoint.cranegame.request.CraneGameRequest;
+import com.funnyland.funnylive.endpoint.cranegame.request.Position;
 import com.funnyland.funnylive.endpoint.cranegame.response.CraneGameResponse;
 import com.funnyland.funnylive.repository.CraneGameRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +33,11 @@ public class CraneGameService {
         CraneGame findCraneGame = craneGameRepository.findById(craneGameId)
                 .orElseThrow(() -> new RuntimeException("craneGame not exist"));
         return CraneGameResponse.of(findCraneGame);
+    }
+
+    public boolean play(Long craneGameId, Position position) {
+        CraneGame findCraneGame = craneGameRepository.findById(craneGameId)
+                .orElseThrow(() -> new RuntimeException("craneGame not exist"));
+        return findCraneGame.play(position);
     }
 }
