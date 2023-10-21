@@ -3,6 +3,7 @@ package com.funnyland.funnylive.endpoint.cranegame.controller;
 import java.util.List;
 
 import com.funnyland.funnylive.endpoint.cranegame.request.CraneGameRequest;
+import com.funnyland.funnylive.endpoint.cranegame.request.Position;
 import com.funnyland.funnylive.endpoint.cranegame.response.CraneGameResponse;
 import com.funnyland.funnylive.service.CraneGameService;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,10 @@ public class CraneGameController {
     @PostMapping
     public CraneGameResponse createCraneGame(@RequestBody CraneGameRequest request) {
         return craneGameService.createCraneGame(request);
+    }
+
+    @PostMapping("/{craneGameId}/verify")
+    public boolean play(@PathVariable Long craneGameId, @RequestBody Position position) {
+        return craneGameService.play(craneGameId, position);
     }
 }
