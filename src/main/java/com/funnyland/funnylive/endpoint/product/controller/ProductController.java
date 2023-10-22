@@ -3,6 +3,7 @@ package com.funnyland.funnylive.endpoint.product.controller;
 import com.funnyland.funnylive.endpoint.product.facade.ProductFacade;
 import com.funnyland.funnylive.endpoint.product.request.ProductRequest;
 import com.funnyland.funnylive.endpoint.product.response.ProductResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +26,7 @@ public class ProductController {
 
     private final ProductFacade productFacade;
 
+    @Operation(summary = "상품 리스트 조회", description = "상품 리스트 조회")
     @GetMapping
     public Page<ProductResponse> getProducts(Pageable pageable) {
         return productFacade.getProducts(pageable);
