@@ -1,5 +1,7 @@
 package com.funnyland.funnylive.domain;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,11 +23,18 @@ public class User extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    private String grade;
+    private String userName;
     private String password;
     private String email;
-    private int point;
+    private String nickName;
 
+    private int point;
+    private LocalDateTime visitedTime;
+    private String relatedSNS;
+
+    private boolean agreeReceiveEmail;
+    private boolean agreeReceivePhone;
 
     public void deductPoints(int totalPoints) {
         this.point -= totalPoints;

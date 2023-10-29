@@ -23,4 +23,13 @@ public class UserFacade {
         User savedUser = userService.createUser(userRequest);
         return UserResponse.of(savedUser);
     }
+
+    public boolean checkNickName(String nickName) {
+        return userService.existUser(nickName);
+    }
+
+    public boolean withdraw(Long userId) {
+        userService.withdraw(userId);
+        return true;
+    }
 }

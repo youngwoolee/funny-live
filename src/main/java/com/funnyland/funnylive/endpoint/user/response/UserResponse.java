@@ -21,7 +21,7 @@ public class UserResponse {
     public static UserResponse of(User user) {
         return UserResponse.builder()
                 .userId(user.getId())
-                .userName(user.getUsername())
+                .userName(user.getUserName())
                 .email(user.getEmail())
                 .point(user.getPoint())
                 .build();

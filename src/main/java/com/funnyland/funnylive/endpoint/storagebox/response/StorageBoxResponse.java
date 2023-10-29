@@ -27,7 +27,7 @@ public class StorageBoxResponse {
                 .productId(storageBox.getProduct().getId())
                 .productName(storageBox.getProduct().getName())
                 .userId(storageBox.getUser().getId())
-                .userName(storageBox.getUser().getUsername())
+                .userName(storageBox.getUser().getUserName())
                 .build();
     }
 
